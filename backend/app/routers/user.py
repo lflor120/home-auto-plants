@@ -16,7 +16,11 @@ def create_user(user: schemas.UserCreate, db: SessionDep):
 def get_all_users(db: SessionDep):
     return user_crud.get_all_users(db=db)
 
-@router.get("/{id}", response_model=schemas.User)
+@router.get("/{id}/plants", response_model=list[schemas.Plant])
+def get_plants_by_userid(id: int, db: SessionDep):
+    return user_crud.get_users_plants(id=id, db=db)
+
+@router.get("/{id}", response_model=schemas.UserPublic)
 def get_user(id: int, db: SessionDep):
     return user_crud.get_user_by_id(id=id, db=db)
 
