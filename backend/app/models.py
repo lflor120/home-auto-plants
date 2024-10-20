@@ -24,7 +24,7 @@ class Plant(Base):
     __tablename__ = "plant"
 
     id = mapped_column(Integer, primary_key=True, index=True)
-    owner_id = mapped_column(Integer, ForeignKey("user.id", ondelete="CASCADE"), nullable=False)
+    owner_id = mapped_column(Integer, ForeignKey("app_user.id", ondelete="CASCADE"), nullable=False)
     plant_type = Column(String, index=True)
     watering_schedule = Column(String, index=True) # this will be in a cron job syntax, look into better data type later
     updated_time = Column(DateTime(timezone=True), onupdate=func.now())
