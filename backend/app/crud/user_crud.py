@@ -17,6 +17,10 @@ def create_user(db: Session, user: schemas.UserCreate):
 def get_all_users(db: Session):
     return db.query(models.User).all()
 
+def get_users_plants(id: int, db: Session):
+    db_user = get_user_by_id(id=id, db=db)
+    return db_user.plants
+
 def get_user_by_id(id: int, db: Session):
     return db.query(models.User).get(id)
 
