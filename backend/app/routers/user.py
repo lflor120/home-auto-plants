@@ -20,8 +20,8 @@ def get_all_users(db: SessionDep):
 def get_user(id: int, db: SessionDep):
     return user_crud.get_user_by_id(id=id, db=db)
 
-@router.put("/{id}", response_model=schemas.User)
-def update_user(id: int, user: schemas.UserCreate, db: SessionDep):
+@router.patch("/{id}", response_model=schemas.User)
+def update_user(id: int, user: schemas.UserPatch, db: SessionDep):
     return user_crud.update_user(id=id, user=user, db=db)
 
 @router.delete("/{id}", response_class=Response, status_code=204)

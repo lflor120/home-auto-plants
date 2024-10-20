@@ -20,8 +20,8 @@ def get_all_plants(db: SessionDep):
 def get_plant(id: int, db: SessionDep):
     return plant_crud.get_plant_by_id(id=id, db=db)
 
-@router.put("/{id}", response_model=schemas.Plant)
-def update_plant(id: int, plant: schemas.PlantCreate, db: SessionDep):
+@router.patch("/{id}", response_model=schemas.Plant)
+def update_plant(id: int, plant: schemas.PlantPatch, db: SessionDep):
     return plant_crud.update_plant(id=id, plant=plant, db=db)
 
 @router.delete("/{id}", response_class=Response, status_code=204)
