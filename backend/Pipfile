@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[scripts]
+start = "uvicorn app.main:app --reload"
+
+[packages]
+fastapi = "*"
+uvicorn = "*"
+sqlalchemy = "*"
+psycopg2 = "*"
+httpx = "*"
+pydantic = "*"
+python-dotenv = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"
