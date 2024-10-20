@@ -12,13 +12,17 @@ class UserCreate(BaseModel):
         if "@" not in value:
             raise ValueError("Must be a valid email")
         return value
+    
+    model_config = ConfigDict(
+        alias_generator=to_camel,
+        populate_by_name=True
+    )
 
 class User(UserCreate):
     id: int
 
     model_config = ConfigDict(
-        from_attributes=True,
-        alias_generator=to_camel
+        from_attributes=True
     )
 
 class PlantCreate(BaseModel):
@@ -28,10 +32,14 @@ class PlantCreate(BaseModel):
     plant_name: str
     description: str
 
+    model_config = ConfigDict(
+        alias_generator=to_camel,
+        populate_by_name=True
+    )
+
 class Plant(PlantCreate):
     id: int
 
     model_config = ConfigDict(
-        from_attributes=True,
-        alias_generator=to_camel
+        from_attributes=True
     )
