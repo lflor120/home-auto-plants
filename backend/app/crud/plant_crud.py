@@ -22,9 +22,8 @@ def get_all_plants(db: Session):
 def get_plant_by_id(id: int, db: Session):
     return db.query(models.Plant).get(id)
 
-def update_plant(id: int, plant: schemas.PlantCreate, db: Session):
+def update_plant(id: int, plant: schemas.PlantPatch, db: Session):
     db_plant = get_plant_by_id(id=id, db=db)
-
     for key, val in plant.model_dump(exclude_unset=True).items():
         setattr(db_plant, key, val)
     

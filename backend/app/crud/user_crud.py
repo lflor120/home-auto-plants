@@ -20,7 +20,7 @@ def get_all_users(db: Session):
 def get_user_by_id(id: int, db: Session):
     return db.query(models.User).get(id)
 
-def update_user(id: int, user: schemas.UserCreate, db: Session):
+def update_user(id: int, user: schemas.UserPatch, db: Session):
     db_user = get_user_by_id(id=id, db=db)
 
     for key, val in user.model_dump(exclude_unset=True).items():
