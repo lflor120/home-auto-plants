@@ -1,4 +1,5 @@
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel, field_validator, ConfigDict
+from pydantic.alias_generators import to_camel
 
 class UserCreate(BaseModel):
     email: str
@@ -15,9 +16,10 @@ class UserCreate(BaseModel):
 class User(UserCreate):
     id: int
 
-    model_config = {
-        'from_attributes': True
-    }
+    model_config = ConfigDict(
+        from_attributes=True,
+        alias_generator=to_camel
+    )
 
 class PlantCreate(BaseModel):
     owner_id: int
@@ -29,6 +31,7 @@ class PlantCreate(BaseModel):
 class Plant(PlantCreate):
     id: int
 
-    model_config = {
-        'from_attributes': True
-    }  
+    model_config = ConfigDict(
+        from_attributes=True,
+        alias_generator=to_camel
+    )
