@@ -13,7 +13,7 @@ def create_plant(db: Session, plant: schemas.PlantCreate):
 
     db.add(db_plant)
     db.commit()
-    db.refresh()
+    db.refresh(db_plant)
     return db_plant
 
 def get_all_plants(db: Session):
