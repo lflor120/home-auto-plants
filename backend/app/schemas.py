@@ -26,6 +26,17 @@ class PlantPatch(BaseModel):
         populate_by_name=True
     )
 
+class PlantPublic(BaseModel):
+    plant_type: str
+    watering_schedule: str
+    plant_name: str
+    description: str
+
+    model_config = ConfigDict(
+        alias_generator=to_camel,
+        populate_by_name=True
+    )    
+
 class Plant(PlantCreate):
     id: int
 
