@@ -5,7 +5,8 @@ from typing import List
 class PlantCreate(BaseModel):
     owner_id: int
     plant_type: str
-    watering_schedule: str
+    interval: int
+    frequency: str
     plant_name: str
     description: str
 
@@ -17,7 +18,9 @@ class PlantCreate(BaseModel):
 class PlantPatch(BaseModel):
     owner_id: int | None = None
     plant_type: str | None = None
-    watering_schedule: str | None = None
+    cron_schedule: str | None = None
+    interval: int | None = None
+    frequency: str | None = None
     plant_name: str | None = None
     description: str | None = None
 
@@ -31,6 +34,8 @@ class PlantPublic(BaseModel):
     watering_schedule: str
     plant_name: str
     description: str
+    interval: int
+    frequency: str
 
     model_config = ConfigDict(
         alias_generator=to_camel,

@@ -3,10 +3,13 @@ from .. import models
 from .. import schemas
 
 def create_plant(db: Session, plant: schemas.PlantCreate):
+    cron_schedule = "0 8 * * 0" # logic for interval and frequency to cron_job will go here
     db_plant = models.Plant(
         owner_id = plant.owner_id,
         plant_type = plant.plant_type,
-        watering_schedule = plant.watering_schedule,
+        cron_schedule = cron_schedule,
+        interval = plant.interval,
+        frequency = plant.frequency,
         plant_name = plant.plant_name,
         description = plant.description
     )
