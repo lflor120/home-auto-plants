@@ -3,7 +3,6 @@ from pydantic.alias_generators import to_camel
 from typing import List
 
 class PlantCreate(BaseModel):
-    owner_id: int
     plant_type: str
     interval: int
     frequency: str
@@ -16,7 +15,6 @@ class PlantCreate(BaseModel):
     )
 
 class PlantPatch(BaseModel):
-    owner_id: int | None = None
     plant_type: str | None = None
     cron_schedule: str | None = None
     interval: int | None = None
@@ -43,57 +41,6 @@ class PlantPublic(BaseModel):
     )    
 
 class Plant(PlantCreate):
-    id: int
-
-    model_config = ConfigDict(
-        from_attributes=True
-    )
-
-class UserCreate(BaseModel):
-    email: str
-    username: str
-    name: str
-    password: str
-
-    @field_validator('email')
-    def must_be_valid_email(cls, value: str):
-        if "@" not in value:
-            raise ValueError("Must be a valid email")
-        return value
-    
-    model_config = ConfigDict(
-        alias_generator=to_camel,
-        populate_by_name=True
-    )
-
-class UserPatch(BaseModel):
-    email: str | None = None
-    username: str | None = None
-    name: str | None = None
-    password: str | None = None
-
-    @field_validator('email')
-    def must_be_valid_email(cls, value: str):
-        if "@" not in value:
-            raise ValueError("Must be a valid email")
-        return value
-    
-    model_config = ConfigDict(
-        alias_generator=to_camel,
-        populate_by_name=True
-    )
-
-class UserPublic(BaseModel):
-    username: str
-    name: str
-    plants: List[Plant]
-
-    model_config = ConfigDict(
-        alias_generator=to_camel,
-        populate_by_name=True
-    )
-
-class User(UserCreate):
     id: int
 
     model_config = ConfigDict(
