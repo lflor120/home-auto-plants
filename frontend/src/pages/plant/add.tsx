@@ -6,7 +6,6 @@ import CreatableSelect from 'react-select/creatable';
 const BACKEND_API = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
 interface Plant {
-    ownerId: string
     plantName: string;
     plantType: string;
     interval: number | null;
@@ -44,7 +43,6 @@ const interval: selectOption[] = [
 
 const PlantForm = () => {
     const [plantData, setPlantData] = useState<Plant>({
-        ownerId: '',
         plantName: '',
         plantType: '',
         interval: null,
@@ -62,11 +60,11 @@ const PlantForm = () => {
 
     const handleSelectChange = (selected: selectOption | any) => {
         console.log(selected)
-        const { name, value, label } = selected;
+        const { name, label} = selected;
 
         setPlantData((prevData) => ({
             ...prevData,
-            [name]: value,
+            [name]: label,
         }));
     }
 
@@ -94,13 +92,13 @@ const PlantForm = () => {
         e.preventDefault();
 
         // call backend api
+        const createPlantCall = await postPlant(plantData);
         
         console.log('Plant Data Submitted:', plantData);
 
 
         // Reset the form after submission
         setPlantData({
-            ownerId: '',
             plantName: '',
             plantType: '',
             interval: null,
